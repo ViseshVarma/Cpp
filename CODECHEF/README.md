@@ -2,4 +2,4 @@
 
 You can search for the problem using the Problem code.
 
-[Codechef]()
+[Codechef](https://www.codechef.com/practice)
