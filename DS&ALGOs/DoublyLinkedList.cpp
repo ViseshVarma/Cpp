@@ -61,12 +61,90 @@ class DoublyLinkedList {
             }
             length++;
         }
+
+        void deleteLast(){
+            if(length == 0) return;
+            Node* temp = tail;
+            if(length == 1) {
+                head = nullptr;
+                tail = nullptr;
+            }
+            else{
+                tail = tail->prev;
+                tail->next = nullptr;
+            }
+            delete temp;
+            length--;
+        }
+
+        void prepend(int value){
+            Node* newNode = new Node(value);
+            if(length == 0){
+                head = newNode;
+                tail = newNode;
+            }
+            else{
+                newNode->next = head;
+                head->prev = newNode;
+                head = newNode;
+            }
+        }
+
+        void deleteFirst(){
+            if(length == 0) return;
+            Node* temp = head;
+            if(length == 1){
+                head = nullptr;
+                tail = nullptr;
+            }
+            else{
+                head = head->next;
+                head->prev = nullptr;
+            }
+            delete temp;
+            length--;
+        }
+
+        Node* get(int index) {
+            if(index < 0 || index >= length){
+                return nullptr;
+            }
+            Node* temp = head;
+            if(index < length/2){
+                for(int i=0; i<index; i++){
+                    temp = temp->next;
+                }
+            }
+            else{
+                temp = tail;
+                for(int i=length-1; i>index; i--){
+                    temp = temp->prev;
+                }
+            }
+            return temp;
+        }
+
+        Node* set(int index, int value){
+                
+        }
+
 };
 
 int main(){
-    DoublyLinkedList* myDLL = new DoublyLinkedList(1);
+    DoublyLinkedList* myDLL = new DoublyLinkedList(0);
 
+    myDLL->append(1);
     myDLL->append(2);
+    myDLL->append(3);
+    myDLL->append(4);
+
+    myDLL->deleteLast();
+
+    myDLL->deleteFirst();
+ 
+    myDLL->prepend(0);
+
+
 
     myDLL->printList();
 }
