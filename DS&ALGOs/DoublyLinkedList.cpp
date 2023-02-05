@@ -124,8 +124,47 @@ class DoublyLinkedList {
             return temp;
         }
 
-        Node* set(int index, int value){
-                
+        bool set(int index, int value){
+            Node* temp = get(index);
+            if(temp) {
+                temp->value = value;
+                return true;
+            }
+            return false;
+        }
+
+        bool insert(int index, int value){
+            if(index<0 || index > length) return false;
+            if(index == 0){
+                prepend(value);
+                return true;
+            }
+            if(index == length){
+                append(value);
+                return true;
+            }
+            Node* newNode = new Node(value);
+            Node* before = get(index-1);
+            Node* after = before->next;
+
+            newNode->prev = before;
+            newNode->next = after;
+            before->next = newNode;
+            after->prev = newNode;
+            length++;
+            return true;
+        }
+
+        void deleteNode(int index){
+            if(index < 0 || index >= length) return;
+            if(index == 0) return deleteFirst();
+            if(index == length - 1) return deleteLast();
+
+            Node* temp = get(index);
+            temp->next->prev = temp->prev;
+            temp->prev->next = temp->next;
+            delete temp;
+            length--;
         }
 
 };
@@ -144,7 +183,9 @@ int main(){
  
     myDLL->prepend(0);
 
+    myDLL->insert(3,4);
 
+    myDLL->deleteNode(3);
 
     myDLL->printList();
 }
