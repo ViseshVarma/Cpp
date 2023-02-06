@@ -1,4 +1,4 @@
-#include<iostream>
+#include<iostream> 
 
 using namespace std;
 
@@ -47,12 +47,43 @@ class Queue{
             cout << "Length: " << length << endl;
         }
 
+        void enqueue(int value){
+            Node* newNode = new Node(value);
+            if(length == 0){
+                first = newNode;
+                last = newNode;
+            }
+            else{
+                last->next = newNode;
+                last = newNode;
+            }
+            length++;
+        }
 
+        int dequeue(){
+            if(length == 0) return INT_MIN;
+            Node* temp = first;
+            int dequeuedValue = first->value;
+            if(length == 1){
+                first = nullptr;
+                last = nullptr;
+            }
+            else{
+                first = first->next;
+            }
+            delete temp;
+            length--;
+            return dequeuedValue;
+        }
 
 };
 
 int main(){
-    Queue* myQueue = new Queue(7);
+    Queue* myQueue = new Queue(1);
+
+    myQueue->enqueue(2);
+
+    myQueue->dequeue();
 
     myQueue->getFirst();
     myQueue->getLast();
