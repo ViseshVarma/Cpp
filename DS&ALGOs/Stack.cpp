@@ -41,10 +41,34 @@ class Stack{
             cout<<"Height: " << height << endl;
         }
         
+        void push(int value){
+            Node* newNode = new Node(value);
+
+            newNode->next = top;
+            top = newNode;
+            height++; 
+        }
+
+        int pop(){
+            if(height == 0) return INT_MIN;  // we use INT_MIN (-2147483647) as it is not usually found in a stack
+            
+            Node* temp = top;
+            int poppedValue = top->value;
+            top = top->next;
+            delete temp;
+            height--;
+
+            return poppedValue;
+        }
+
 };
 
 int main(){
-    Stack* myStack = new Stack(4);
+    Stack* myStack = new Stack(2);
+
+    myStack->push(1);
+
+    myStack->pop();
 
     myStack->getTop();
     myStack->getHeight();
