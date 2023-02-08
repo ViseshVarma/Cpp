@@ -50,7 +50,22 @@ class BinarySearchTree{
             }
         }
 
+        bool contains(int value){
+            Node* temp = root;
 
+            while(temp){
+                if(value < temp->value){
+                    temp = temp->left;
+                }
+                else if(value > temp->value){
+                    temp = temp->right;
+                }
+                else{
+                    return true;
+                }
+            }
+            return false;
+        }
 
 };
 
@@ -61,11 +76,12 @@ int main(){
     myBST->insert(21);
     myBST->insert(76);
     myBST->insert(18);
+    myBST->insert(27);
     myBST->insert(52);
     myBST->insert(82);
 
-    myBST->insert(27);
+    cout<<"Contains 27: " << myBST->contains(27) << endl;
+    cout<<"Contains 17: " << myBST->contains(17);
 
-    cout << myBST->root->left->right->value << endl;
 
 }
