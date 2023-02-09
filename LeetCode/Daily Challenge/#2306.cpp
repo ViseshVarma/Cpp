@@ -1,3 +1,5 @@
+// 2306. Naming a Company
+
 class Solution {
 public:
     long long distinctNames(vector<string>& ideas) {
