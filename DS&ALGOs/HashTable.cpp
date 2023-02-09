@@ -34,10 +34,41 @@ class HashTable{
                 }
             }
         }
+
+        int hash(string key){
+            int hash = 0;
+            for(int i=0; i<key.length(); i++){
+                int asciiValue = int(key[i]);
+                hash = (hash + asciiValue * 23) % SIZE;
+            }
+            return hash;
+        }
+
+        void set(string key, int value){
+            int index = hash(key);
+            Node* newNode = new Node(key, value);
+            if(dataMap[index] == nullptr){
+                dataMap[index] = newNode;
+            }
+            else{
+                Node* temp = dataMap[index];
+                while(temp->next != nullptr){
+                    temp = temp->next;
+                }
+                temp->next = newNode;
+            }
+        }
 };
 
 int main(){
     HashTable* myHashTable = new HashTable();
+
+    myHashTable->set("nails", 100);
+    myHashTable->set("tile", 50);
+    myHashTable->set("lumber", 80);
+
+    myHashTable->set("bolts", 200);
+    myHashTable->set("screws", 140);
 
     myHashTable->printTable();
 }
