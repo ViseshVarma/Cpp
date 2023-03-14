@@ -1,3 +1,8 @@
+/*  In Bubble sort first it will check if the next element is larger,
+if it is larger then it will switch. Doing this we will bubble the
+largest number to the end of the array. then we start over the same process
+from the first element in the array */
+
 #include <iostream>
 
 using namespace std;
